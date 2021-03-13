@@ -109,7 +109,7 @@ function get_r2_data() {
     })
 }
 
-
+gettime()
 get_last_update_time()
 get_c1_data()
 get_c2_data()
@@ -118,6 +118,7 @@ get_l2_data()
 get_r1_data()
 get_r2_data()
 
+setInterval(gettime, 1000)
 setInterval(get_last_update_time, 1000 * 10)
 setInterval(get_c1_data, 1000 * 10)
 setInterval(get_c2_data, 10000 * 10)

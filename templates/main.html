@@ -20,10 +20,10 @@
 <div id="l1">我是左1</div>
 <div id="l2">我是左2</div>
 <div id="c1">
-    <div class="num"><h1>321</h1></div>
-    <div class="num"><h1>321</h1></div>
-    <div class="num"><h1>321</h1></div>
-    <div class="num"><h1>321</h1></div>
+    <div class="num"><h1></h1></div>
+    <div class="num"><h1></h1></div>
+    <div class="num"><h1></h1></div>
+    <div class="num"><h1></h1></div>
     <div class="txt"><h2>累计确诊</h2></div>
     <div class="txt"><h2>剩余疑似</h2></div>
     <div class="txt"><h2>累积治愈</h2></div>
@@ -41,23 +41,24 @@
 
 <script src="../static/js/controller.js"></script>
 
-<script>
-    function gettime() {
-        $.ajax({
-            url: "/time",
-            timeout: 10000, //超时时间设置为10秒；
-            success: function (data) {
-                $("#time").html(data)
-            },
-            error: function (xhr, type, errorThrown) {
-
-            }
-        });
-    }
-
-    gettime()
-    setInterval(gettime, 1000)
-</script>
+{##}
+{#<script>#}
+{#    function gettime() {#}
+{#        $.ajax({#}
+{#            url: "/time",#}
+{#            timeout: 10000, //超时时间设置为10秒；#}
+{#            success: function (data) {#}
+{#                $("#time").html(data)#}
+{#            },#}
+{#            error: function (xhr, type, errorThrown) {#}
+{##}
+{#            }#}
+{#        });#}
+{#    }#}
+{##}
+{#    gettime()#}
+{#    setInterval(gettime, 1000)#}
+{#</script>#}
 
 </body>
 </html>
