@@ -1,7 +1,7 @@
 import pymysql
 import time
 import json
-import traceback  #追踪异常
+import traceback 
 import requests
 
 
@@ -10,13 +10,7 @@ def get_tencent_data():
     :return: 返回历史数据和当日详细数据
     """
     url = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_h5'
-    url_his = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_other'  # 加上这个history大兄弟++++++++
-
-    '''
-    headers = {
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36',
-    }
-    '''
+    url_his = 'https://view.inews.qq.com/g2/getOnsInfo?name=disease_other'  
 
     headers = {
         'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36'
@@ -27,7 +21,6 @@ def get_tencent_data():
     res = json.loads(r.text)  # json字符串转字典
     data_all = json.loads(res['data'])
 
-    # 再加上history的配套东东++++++++
     r_his = requests.get(url_his)
     res_his = json.loads(r_his.text)
     data_his = json.loads(res_his['data'])
@@ -37,7 +30,7 @@ def get_tencent_data():
     for i in data_his["chinaDayList"]:
         ds = i["y"] + "." + i["date"]
         tup = time.strptime(ds, "%Y.%m.%d")
-        ds = time.strftime("%Y-%m-%d", tup)  # 改变时间格式,不然插入数据库会报错，数据库是datetime类型
+        ds = time.strftime("%Y-%m-%d", tup)  # 改变时间格式，数据库是datetime类型
         confirm = i["confirm"]
         suspect = i["suspect"]
         heal = i["heal"]
@@ -56,7 +49,6 @@ def get_tencent_data():
 
     print(history)
 
-    # 下面就不用动了
     details = []  # 当日详细数据
     update_time = data_all["lastUpdateTime"]
     data_china = data_all["areaTree"][0]  # 中国
@@ -80,10 +72,10 @@ def get_conn():
     :return: 连接，游标
     """
     # 创建连接
-    conn = pymysql.connect(host="209.141.53.216",
-                           user="root",
-                           password="garylzgarylz",
-                           db="cov",
+    conn = pymysql.connect(host="IP地址",
+                           user="用户名",
+                           password="密码",
+                           db="数据库名",
                            charset="utf8")
     # 创建游标
     cursor = conn.cursor()  # 执行完毕返回的结果集默认以元组显示

@@ -12,10 +12,10 @@ def get_conn():
     :return: 连接，游标
     """
     # 创建连接
-    conn = pymysql.connect(host="209.141.53.216",
-                           user="root",
-                           password="garylzgarylz",
-                           db="cov",
+    conn = pymysql.connect(host="ip地址",
+                           user="用户名",
+                           password="密码",
+                           db="数据库名",
                            charset="utf8")
     # 创建游标
     cursor = conn.cursor()  # 执行完毕返回的结果集默认以元组显示
@@ -55,7 +55,7 @@ def get_c1_data():
     """
     :return: 返回大屏div id=c1 的数据
     """
-    # 因为会更新多次数据，取时间戳最新的那组数据
+    # 取时间戳最新的那组数据
     sql = "select sum(confirm)," \
           "(select suspect from history order by ds desc limit 1)," \
           "sum(heal)," \
@@ -73,7 +73,7 @@ def get_c2_data():
     """
     :return:  返回各省数据
     """
-    # 因为会更新多次数据，取时间戳最新的那组数据
+    # 取时间戳最新的那组数据
     sql = "select province,sum(confirm) from details " \
           "where update_time=(select update_time from details " \
           "order by update_time desc limit 1) " \
@@ -112,7 +112,7 @@ def get_r2_data():
         获取世界各国的疫情数据
         :return:
     '''
-    # 因为会更新多次数据，取时间戳最新的那组数据
+    # 取时间戳最新的那组数据
     sql = "select province,sum(confirm_add) from details " \
           "where update_time=(select update_time from details " \
           "order by update_time desc limit 1) " \
